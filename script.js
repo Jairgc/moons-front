@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const centerTypeFilter = document.getElementById('centerTypeFilter');
     const zoneFilter = document.getElementById('zoneFilter');
     const servicesFilter = document.getElementById('servicesFilter');
-    const container = document.getElementById('smilecenters-container');
+    const container = document.getElementById('centersGrid'); // Updated to match the HTML structure
     let smilecentersData = [];
 
     fetch('https://moons-ce6838cc8a56.herokuapp.com/api/smilecenters/')
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.innerHTML = '';
         data.forEach(smilecenter => {
             const smilecenterDiv = document.createElement('div');
-            smilecenterDiv.className = 'smilecenter';
+            smilecenterDiv.className = 'center'; // Ensure this matches the CSS class for styling
             
             const name = document.createElement('h2');
             name.textContent = smilecenter.name;
@@ -61,11 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const timeTable = document.createElement('p');
             const parsedTimeTable = JSON.parse(smilecenter.time_table);
-            let timeTableText = 'Horario: ';
+            let timeTableText = 'Time Table: ';
             for (const [day, times] of Object.entries(parsedTimeTable)) {
                 let dayTranslated = day;
                 if (day === "sunday") {
-                    dayTranslated = "domingo";
+                    dayTranslated = "Domingo";
                 } else if (day === "saturday") {
                     dayTranslated = "Sábado";
                 } else if (day === "weekdays") {
